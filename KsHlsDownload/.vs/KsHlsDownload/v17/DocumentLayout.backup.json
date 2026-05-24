@@ -1,0 +1,171 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\aWpfWinform\\KsHlsDownload\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|KsHlsDownload||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\mainfrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:mainfrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|g:\\awpfwinform\\kshlsdownload\\mainfrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:mainfrm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\linkparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:linkparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\htmlextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:htmlextractor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\detailpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:detailpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\hlsdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:hlsdownloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\downloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:downloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|G:\\aWpfWinform\\KsHlsDownload\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{83BDCA17-AF63-45AA-BE9D-BDF826D5CBAF}|KsHlsDownload.csproj|g:\\awpfwinform\\kshlsdownload\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "KsHlsDownload",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\KsHlsDownload.csproj",
+              "RelativeDocumentMoniker": "KsHlsDownload.csproj",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\KsHlsDownload.csproj*",
+              "RelativeToolTip": "KsHlsDownload.csproj*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-05-23T04:14:29.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LinkParser.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\LinkParser.cs",
+              "RelativeDocumentMoniker": "LinkParser.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\LinkParser.cs",
+              "RelativeToolTip": "LinkParser.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAowOoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T05:06:16.335Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "mainFrm.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\mainFrm.cs",
+              "RelativeDocumentMoniker": "mainFrm.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\mainFrm.cs",
+              "RelativeToolTip": "mainFrm.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAAALcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T05:05:03.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Downloader.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\Downloader.cs",
+              "RelativeDocumentMoniker": "Downloader.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\Downloader.cs",
+              "RelativeToolTip": "Downloader.cs",
+              "ViewState": "AgIAAOwAAAAAAAAAAADwv/sAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T05:18:20.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "mainFrm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\mainFrm.cs",
+              "RelativeDocumentMoniker": "mainFrm.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\mainFrm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "mainFrm.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T04:42:41.298Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HtmlExtractor.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\HtmlExtractor.cs",
+              "RelativeDocumentMoniker": "HtmlExtractor.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\HtmlExtractor.cs",
+              "RelativeToolTip": "HtmlExtractor.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAvwBQAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T07:26:53.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DetailPage.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\DetailPage.cs",
+              "RelativeDocumentMoniker": "DetailPage.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\DetailPage.cs",
+              "RelativeToolTip": "DetailPage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T15:55:06.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HlsDownloader.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\HlsDownloader.cs",
+              "RelativeDocumentMoniker": "HlsDownloader.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\HlsDownloader.cs",
+              "RelativeToolTip": "HlsDownloader.cs",
+              "ViewState": "AgIAAAIBAAAAAAAAAAAuwBYBAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T05:17:23.387Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "G:\\aWpfWinform\\KsHlsDownload\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "G:\\aWpfWinform\\KsHlsDownload\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T05:06:23.825Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

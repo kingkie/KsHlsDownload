@@ -1,0 +1,10 @@
+G:\aWpfWinform\KsHlsDownload\bin\Debug\KsHlsDownload.exe.config
+G:\aWpfWinform\KsHlsDownload\bin\Debug\KsHlsDownload.exe
+G:\aWpfWinform\KsHlsDownload\bin\Debug\KsHlsDownload.pdb
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.csproj.AssemblyReference.cache
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.mainFrm.resources
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.Properties.Resources.resources
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.csproj.GenerateResource.cache
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.csproj.CoreCompileInputs.cache
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.exe
+G:\aWpfWinform\KsHlsDownload\obj\Debug\KsHlsDownload.pdb
