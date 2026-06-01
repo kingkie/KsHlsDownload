@@ -16,6 +16,7 @@ namespace KsHlsDownload
         private string _downloadPath;
         private readonly string _tempPath;
         private string _cookie = string.Empty;
+        private string strfilename = string.Empty;
 
         public string Cookie
         {
@@ -36,8 +37,11 @@ namespace KsHlsDownload
         /// </summary>
         public string FileName
         {
-            get;
-            set;
+            get => strfilename;
+            set
+            {
+                strfilename = value;
+            }
         }
 
         public event EventHandler<DownloadProgressEventArgs> ProgressChanged;
