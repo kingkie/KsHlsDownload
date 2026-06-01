@@ -240,6 +240,7 @@ namespace KsHlsDownload
 
             try
             {
+                hlsDownloader.FileName = strFileName;
                 await hlsDownloader.DownloadAsync(resolvedUrl, detailId);
             }
             catch (Exception ex)

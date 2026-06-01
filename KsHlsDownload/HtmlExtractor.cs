@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 
 namespace KsHlsDownload
@@ -26,7 +24,7 @@ namespace KsHlsDownload
                 bool isAppUrl = url.Contains("chenzhongtech");
                 var detailPage = new DetailPage(isAppUrl);
                 detailPage.LogMessage += (sender, msg) => OnLogMessage($"DetailPage: {msg}");
-
+                
                 string html = await detailPage.RunAsync(url, cookie);
                 if (string.IsNullOrEmpty(html))
                 {
@@ -50,10 +48,10 @@ namespace KsHlsDownload
             request.Timeout = TimeoutSeconds * 1000;
             request.ReadWriteTimeout = TimeoutSeconds * 1000;
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
+            
             // 根据URL类型设置不同的headers
             bool isAppUrl = url.Contains("chenzhongtech");
-
+            
             if (isAppUrl)
             {
                 // APP headers (用于长视频链接)
@@ -68,10 +66,10 @@ namespace KsHlsDownload
                 request.Headers["Origin"] = "https://www.kuaishou.com";
                 request.Referer = "https://www.kuaishou.com/new-reco";
             }
-
+            
             request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
             request.Headers["Accept-Language"] = "zh-CN,zh;q=0.9";
-
+            
             if (!string.IsNullOrEmpty(cookie))
             {
                 request.Headers["Cookie"] = cookie;
@@ -145,14 +143,18 @@ namespace KsHlsDownload
                 else
                 {
                     // 匹配 "photo":{"..."}, "serialInfo" 格式
-                    // 使用 Singleline 选项让 . 匹配换行符
-                    var regex = new Regex(@"""photo"":(\{.*?\}),\s*""serialInfo""", RegexOptions.Singleline);
-                    var match = regex.Match(script);
+                    // 使用更健壮的方法：找到 "photo":{ 后，手动匹配到平衡的 }
+                    var photoRegex = new Regex(@"""photo""\s*:\s*\{", RegexOptions.Singleline);
+                    var match = photoRegex.Match(script);
                     if (match.Success)
                     {
-                        string photoData = match.Groups[1].Value;
-                        OnLogMessage($"提取到photo数据: {photoData.Substring(0, Math.Min(200, photoData.Length))}...");
-                        return photoData;
+                        int startIdx = match.Index + match.Length;
+                        string photoData = ExtractBalancedJson(script, startIdx);
+                        if (!string.IsNullOrEmpty(photoData))
+                        {
+                            OnLogMessage($"提取到photo数据，长度: {photoData.Length}");
+                            return photoData;
+                        }
                     }
 
                     // 如果第一种方式失败，尝试匹配更大范围
@@ -174,15 +176,82 @@ namespace KsHlsDownload
             return null;
         }
 
+        /// <summary>
+        /// 从指定位置开始提取平衡的JSON对象（处理嵌套的花括号）
+        /// </summary>
+        private string ExtractBalancedJson(string text, int startIdx)
+        {
+            if (string.IsNullOrEmpty(text) || startIdx < 0 || startIdx >= text.Length)
+            {
+                return null;
+            }
+
+            int braceCount = 0;
+            bool inString = false;
+            bool escaped = false;
+
+            for (int i = startIdx; i < text.Length; i++)
+            {
+                char c = text[i];
+
+                if (escaped)
+                {
+                    escaped = false;
+                    continue;
+                }
+
+                if (c == '\\' && inString)
+                {
+                    escaped = true;
+                    continue;
+                }
+
+                if (c == '"')
+                {
+                    inString = !inString;
+                    continue;
+                }
+
+                if (inString)
+                {
+                    continue;
+                }
+
+                if (c == '{')
+                {
+                    if (braceCount == 0)
+                    {
+                        // 找到JSON对象的开始
+                        startIdx = i;
+                    }
+                    braceCount++;
+                }
+                else if (c == '}')
+                {
+                    braceCount--;
+                    if (braceCount == 0)
+                    {
+                        // 找到JSON对象的结束
+                        return text.Substring(startIdx, i - startIdx + 1);
+                    }
+                }
+            }
+
+            return null;
+        }
+
         private ExtractedData ExtractDataFromJson(string jsonData, string url, bool isWeb)
         {
             try
             {
+                // JSON格式修复和补全
+                jsonData = FixJsonFormat(jsonData);
+
                 var serializer = new JavaScriptSerializer();
                 serializer.MaxJsonLength = int.MaxValue;
-
+                
                 dynamic data = serializer.DeserializeObject(jsonData);
-
+                
                 if (isWeb)
                 {
                     return ExtractWebData(data, url);
@@ -199,6 +268,127 @@ namespace KsHlsDownload
             }
         }
 
+        /// <summary>
+        /// 修复JSON格式问题，处理常见的格式错误
+        /// </summary>
+        private string FixJsonFormat(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+            {
+                return json;
+            }
+
+            try
+            {
+                // 先尝试直接解析，如果成功则返回原字符串
+                var serializer = new JavaScriptSerializer();
+                serializer.DeserializeObject(json);
+                return json;
+            }
+            catch
+            {
+                // 解析失败，尝试修复
+            }
+
+            // 修复1: 处理嵌套的JSON字符串（将未转义的内层引号转义）
+            // 例如: {"field":"{"nested":"value"}"} -> 修复内层引号
+            int depth = 0;
+            var result = new System.Text.StringBuilder();
+            bool inString = false;
+            bool escaped = false;
+
+            for (int i = 0; i < json.Length; i++)
+            {
+                char c = json[i];
+
+                if (escaped)
+                {
+                    result.Append(c);
+                    escaped = false;
+                    continue;
+                }
+
+                if (c == '\\')
+                {
+                    result.Append(c);
+                    escaped = true;
+                    continue;
+                }
+
+                if (c == '"' && !escaped)
+                {
+                    inString = !inString;
+                    result.Append(c);
+
+                    // 检查是否是嵌套JSON的开始/结束
+                    if (inString)
+                    {
+                        // 检查后面是否是冒号（对象键）
+                        int nextNonSpace = i + 1;
+                        while (nextNonSpace < json.Length && json[nextNonSpace] == ' ')
+                        {
+                            nextNonSpace++;
+                        }
+
+                        if (nextNonSpace < json.Length && json[nextNonSpace] == ':')
+                        {
+                            // 这是对象键，继续
+                        }
+                    }
+                    continue;
+                }
+
+                // 如果在字符串外，遇到 { 或 [ 增加深度
+                if (!inString)
+                {
+                    if (c == '{' || c == '[')
+                    {
+                        depth++;
+                    }
+                    else if (c == '}' || c == ']')
+                    {
+                        depth--;
+                    }
+                }
+
+                result.Append(c);
+            }
+
+            string fixedJson = result.ToString();
+
+            // 修复2: 处理多余的反斜杠（如 \"trendingInfo\" 中的 \"）
+            // 这种情况下需要检查是否是误转义
+            fixedJson = System.Text.RegularExpressions.Regex.Replace(
+                fixedJson,
+                @"\\+([""'])",
+                match =>
+                {
+                    string quote = match.Groups[1].Value;
+                    // 如果反斜杠数量是奇数，说明可能被误转义了
+                    int backslashCount = match.Value.Length - 1;
+                    if (backslashCount % 2 == 1)
+                    {
+                        // 保留一个反斜杠和一个引号
+                        return "\\" + quote;
+                    }
+                    return match.Value;
+                });
+
+            // 修复3: 处理 "field":"value"{next...} 缺少逗号的情况
+            fixedJson = System.Text.RegularExpressions.Regex.Replace(
+                fixedJson,
+                @"}([^{}\[\],""\s])",
+                "},$1"
+            );
+            fixedJson = System.Text.RegularExpressions.Regex.Replace(
+                fixedJson,
+                @"]([^{}\[\],""\s])",
+                "],$1"
+            );
+
+            return fixedJson;
+        }
+
         private ExtractedData ExtractWebData(dynamic data, string url)
         {
             try
@@ -206,7 +396,7 @@ namespace KsHlsDownload
                 var linkParser = new LinkParser();
                 var parsedUrl = linkParser.ExtractParams(url);
                 string detailId = parsedUrl.DetailId;
-
+                
                 if (string.IsNullOrEmpty(detailId))
                 {
                     OnLogMessage("无法提取作品ID");
@@ -214,11 +404,11 @@ namespace KsHlsDownload
                 }
 
                 string key = $"VisionVideoDetailPhoto:{detailId}";
-
+                
                 if (data is Dictionary<string, object> dict && dict.ContainsKey("defaultClient"))
                 {
                     var defaultClient = dict["defaultClient"] as Dictionary<string, object>;
-
+                    
                     if (defaultClient != null && defaultClient.ContainsKey(key))
                     {
                         var photoData = defaultClient[key] as Dictionary<string, object>;
@@ -248,7 +438,7 @@ namespace KsHlsDownload
                 {
                     // 调试：输出提取到的所有字段
                     OnLogMessage($"APP数据字段: {string.Join(", ", dict.Keys)}");
-
+                    
                     // 检查是否有download字段
                     if (dict.ContainsKey("download"))
                     {
@@ -268,7 +458,7 @@ namespace KsHlsDownload
                             OnLogMessage($"download字符串: {downloadObj.ToString()?.Substring(0, Math.Min(100, downloadObj.ToString()?.Length ?? 0))}...");
                         }
                     }
-
+                    
                     return ParsePhotoData(dict, detailId, false);
                 }
                 else
@@ -299,7 +489,7 @@ namespace KsHlsDownload
                 // 调试：输出所有可用的键
                 string allKeys = string.Join(", ", photoData.Keys);
                 OnLogMessage($"可用字段: {allKeys}");
-
+                
                 if (photoData.ContainsKey("caption"))
                 {
                     result.Caption = photoData["caption"]?.ToString();
@@ -447,7 +637,7 @@ namespace KsHlsDownload
                                 {
                                     var cdnList = atlas["cdn"] as List<object>;
                                     var list = atlas["list"] as List<object>;
-
+                                    
                                     if (cdnList != null && cdnList.Count > 0 && list != null && list.Count > 0)
                                     {
                                         string cdn = cdnList[0]?.ToString();
@@ -461,7 +651,7 @@ namespace KsHlsDownload
                                                 result.DownloadUrls.Add(fullUrl);
                                             }
                                         }
-
+                                        
                                         if (result.DownloadUrls.Count > 0)
                                         {
                                             result.PhotoType = "视频";
@@ -507,19 +697,19 @@ namespace KsHlsDownload
                 {
                     var mainMvUrlsObj = photoData["mainMvUrls"];
                     OnLogMessage($"mainMvUrls 字段类型: {mainMvUrlsObj?.GetType().Name}");
-
+                    
                     // 处理数组类型 (Object[] 或 List<object>)
                     if (mainMvUrlsObj is System.Collections.IList arrayObj)
                     {
                         var urls = new List<string>();
                         OnLogMessage($"mainMvUrls 数组长度: {arrayObj.Count}");
-
+                        
                         int itemIndex = 0;
                         foreach (var item in arrayObj)
                         {
                             itemIndex++;
                             OnLogMessage($"=== mainMvUrls[{itemIndex}] 类型: {item?.GetType().Name} ===");
-
+                            
                             if (item is Dictionary<string, object> urlDict)
                             {
                                 // 打印所有键值对
@@ -533,7 +723,7 @@ namespace KsHlsDownload
                                     }
                                     OnLogMessage($"    [{kvp.Key}]: {valueStr}");
                                 }
-
+                                
                                 // 尝试获取 url 字段
                                 if (urlDict.ContainsKey("url"))
                                 {
@@ -567,7 +757,7 @@ namespace KsHlsDownload
                                                     }
                                                     OnLogMessage($"    urlList[{urlIndex}][{urlKvp.Key}]: {urlValue}");
                                                 }
-
+                                                
                                                 if (urlItemDict.ContainsKey("url"))
                                                 {
                                                     string url = urlItemDict["url"]?.ToString();
@@ -598,7 +788,7 @@ namespace KsHlsDownload
                                 }
                             }
                         }
-
+                        
                         if (urls.Count > 0)
                         {
                             // 对下载链接进行去重
@@ -639,7 +829,7 @@ namespace KsHlsDownload
                     {
                         var videoObj = extParamsDict["video"];
                         OnLogMessage($"ext_params.video 字段类型: {videoObj?.GetType().Name}");
-
+                        
                         if (videoObj is string && !string.IsNullOrEmpty(videoObj.ToString()))
                         {
                             string url = CleanUrl(videoObj.ToString());
@@ -758,7 +948,7 @@ namespace KsHlsDownload
             {
                 return url;
             }
-
+            
             // 去除可能的反引号、引号和空格
             return url.Trim().Trim('`').Trim('\'').Trim('"');
         }

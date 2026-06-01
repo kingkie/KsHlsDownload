@@ -31,6 +31,14 @@ namespace KsHlsDownload
                 _downloadPath = value;
             }
         }
+        /// <summary>
+        /// 文件名
+        /// </summary>
+        public string FileName
+        {
+            get;
+            set;
+        }
 
         public event EventHandler<DownloadProgressEventArgs> ProgressChanged;
         public event EventHandler<DownloadCompleteEventArgs> DownloadComplete;
@@ -117,18 +125,30 @@ namespace KsHlsDownload
             LogMessage?.Invoke(this, "HLS下载: 开始下载ts分片...");
             List<string> tsFiles = await DownloadTsFiles(tsUrls, detailId);
 
+            string strFilename = string.Empty;
+            if (!string.IsNullOrEmpty(FileName))
+            {
+                strFilename = FileName;
+            }
+            else
+            {
+                strFilename = detailId;
+            }
+
             // 5. 合并ts文件
             LogMessage?.Invoke(this, "HLS下载: 合并ts文件...");
-            string outputPath = await MergeTsFiles(tsFiles, detailId);
+            string outputPath = await MergeTsFiles(tsFiles, detailId, strFilename);
 
             // 6. 检查文件大小
             long fileSize = new FileInfo(outputPath).Length;
             LogMessage?.Invoke(this, $"HLS下载完成! 文件大小: {FormatFileSize(fileSize)}");
             LogMessage?.Invoke(this, $"HLS视频已保存: {outputPath}");
 
+
+
             DownloadComplete?.Invoke(this, new DownloadCompleteEventArgs
             {
-                FileName = $"{detailId}_hls.mp4",
+                FileName = $"{strFilename}.mp4",
                 FilePath = outputPath,
                 Success = true
             });
@@ -288,9 +308,19 @@ namespace KsHlsDownload
             return tsFiles;
         }
 
-        private async Task<string> MergeTsFiles(List<string> tsFiles, string detailId)
+        private async Task<string> MergeTsFiles(List<string> tsFiles, string detailId, string strFileName = "")
         {
-            string outputPath = Path.Combine(_downloadPath, $"{detailId}_hls.mp4");
+            string strFile = string.Empty;
+            if(string.IsNullOrEmpty(strFileName))
+            {
+                strFile = detailId;
+            }
+            else
+            {
+                strFile = strFileName;
+            }
+
+            string outputPath = Path.Combine(_downloadPath, $"{strFile}_hls.mp4");
 
             using (var outputStream = new FileStream(outputPath, FileMode.Create, FileAccess.Write))
             {
