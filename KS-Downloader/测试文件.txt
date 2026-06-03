@@ -1,0 +1,10 @@
+5.20爆款
+QQ，我暑期兼职杀手，你让我参加奥运
+https://v.kuaishou.com/Kxmds319
+
+
+
+提取到的链接: ['https://www.kuaishou.com/short-video/3xvw6dnzc5fcjrk?cc=share_copylink&followRefer=151&shareMethod=TOKEN&docId=9&kpn=KUAISHOU&subBiz=BROWSE_SLIDE_PHOTO&photoId=3xvw6dnzc5fcjrk&shareId=18970871180432&shareToken=X-9m8UcL3Bf525a9&shareResourceType=PHOTO_OTHER&userId=3xjpy293nxa7ngs&shareType=1&et=1_u%252F2009678782501990497_l0%2524s&shareMode=APP&efid=3xtiiw86t8ce4ue&originShareId=18970871180432&appType=21&shareObjectId=5229242312666371798&shareUrlOpened=0&timestamp=1779415544747&utm_source=app_share&utm_medium=app_share&utm_campaign=app_share&location=app_share']
+L604,更新作者昵称: {'collection_time': '2026-05-22_11:35:41', 'photoType': '视频', 'detailID': '3xvw6dnzc5fcjrk', 'caption': '\xa0#知识播种计划  #老铁知识百科  #新知问答夜  #2026高考加油', 'coverUrl': 'https://p23.a.yximgs.com/upic/2026/05/21/01/BMjAyNjA1MjEwMTQ4NTNfNDU2Mzc0MTE0M18xOTY0OTA3OTQzNDdfMF8z_Bbf4779cd61d3b2e1beac71706f13817f.jpg?tag=1-1779420938-xpcwebdetail-0-qvtaaq1p66-43e812d6a0f2a1b3&clientCacheKey=3xvw6dnzc5fcjrk.jpg&di=700a86af&bp=10004', 'duration': '00:09:53', 'realLikeCount': 3894, 'download': ['https://v4.oskwai.com/ksc2/vO_xqaSDbXl_tFI2eWsR7FPZHn_A79_9E3KwQR4Mj1rGwwH4utFX-DZp7_q-VRO1RJTfWr4yRt_WVNHOGomX2udbxIjUE-sweJAMLLQzu9_JlwEABd-iH6ERy94ldOsNl6O43rt6un8WyhmSCNBpIaT8crhmvMkhUnCvlxyD_LTguPoO-mTNUBkRFOTQ_GT4.mp4?pkey=AAUos5avzPzAkJgOpxgNkWMP1YqPt3-zbp0gExvR_LJcmmtpoftEeRJdfqJjnNpAbUQX8FqeXoV4uRQ8l-TVQ0sgvp4eJdobD63VErsiLr_snGepMgb7AjcYnWFd8kNk3Lk&tag=1-1779420938-unknown-0-22mc5t7e8l-0c00ab5db56cb04d&clientCacheKey=3xvw6dnzc5fcjrk_b.mp4&di=700a86af&bp=10004&kwai-not-alloc=40&tt=b&ss=vps'], 'timestamp': '2026-05-21_02:58:21', 'viewCount': '27.7万', 'shareCount': -1, 'commentCount': -1}
+
+试使用HLS流媒体下载...
